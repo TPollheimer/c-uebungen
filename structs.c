@@ -39,6 +39,21 @@ void showStudentData(struct student1 *st) {
     printf("Age: %d\n", st->age);
 }
 
+struct Point {
+  int x;
+  int y;
+} p1;
+
+void pointerzuweisung(struct Point *ptr1){
+    ptr1 = &p1;
+    ptr1->x = 3;
+    ptr1->y = 4;
+}
+union Daten {
+    unsigned int  zahl;        // als eine ganze Zahl
+    unsigned char byte[4];     // dieselben Bytes einzeln
+};
+
 int main() {
     /* declare two variables */
     struct student s1;
@@ -52,8 +67,8 @@ int main() {
     s2.grade = 10;
     sprintf(s2.name, "Batman Jokerson"); // wir speicher "" in s2.name
     
-    printf("Student: %s, %d\n", s1.name, s1.age);
-    printf("Student: %s, %d\n", s2.name, s2.age);
+    printf("\nStudent: %s, %d\n", s1.name, s1.age);
+    printf("Student: %s, %d\n\n", s2.name, s2.age);
     /**********************************************/
 
     course cs1;
@@ -69,8 +84,8 @@ int main() {
     cs2.hours = 14.25;
        
     /* display course info */
-    printf("%d\t%s\t%4.2f\n", cs1.id, cs1.title, cs1.hours);
-    printf("%d\t%s\t%4.2f\n", cs2.id, cs2.title, cs2.hours);
+    printf("\n%d\t%s\t%4.2f\n", cs1.id, cs1.title, cs1.hours);
+    printf("%d\t%s\t%4.2f\n\n", cs2.id, cs2.title, cs2.hours);
     /**********************************************/
 
     point p;
@@ -81,7 +96,7 @@ int main() {
     c.radius = 3.14;
     c.center = p;
     
-    printf("Circle radius is %.2f, center is at (%d, %d)", c.radius, c.center.x, c.center.y);
+    printf("\nCircle radius is %.2f, center is at (%d, %d)\n", c.radius, c.center.x, c.center.y);
     /**********************************************/
 
     // New Student Record Creation
@@ -97,10 +112,6 @@ int main() {
     st2.number = 9;
     st2.age = 15;
 
-
-    struct Point *ptr = st1;
-
-    showStudentData(ptr);
     // Displaying Student 1 Details
     showStudentData(&st1);
     
@@ -108,6 +119,24 @@ int main() {
     showStudentData(&st2);
     /**********************************************/
 
+    struct Point *ptr1 = &p1;
+    pointerzuweisung(ptr1);
 
+    printf("\n%d\t%d\n",ptr1->x,ptr1->y);
+    
+    /**********************************************/
+    // Zahl vor dem Punkt (%8.2f): Mindestbreite, es wird links mit Leerzeichen aufgefüllt, nie etwas abgeschnitten.
+    // Zahl nach dem Punkt (%8.2f): Anzahl der Nachkommastellen, es wird gerundet.
+    /**********************************************/
+    union Daten d;
+    d.zahl = 123456;
+
+    for (int i = 0; i < 4; i++) {
+        sende_byte(d.byte[i]);     // jedes Byte einzeln senden
+    }
+    //Du schreibst die Zahl hinein und liest die Bytes heraus, ohne zu kopieren oder zu rechnen. Genauso geht es umgekehrt, wenn du 4 empfangene Bytes zu einer Zahl zusammensetzen willst.
+    /**********************************************/
+    /**********************************************/
+    /**********************************************/   
     return 0;
 }
