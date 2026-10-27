@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void my_strlen(char *str);
+int my_strlen(char *str);
 
 int main(){
     char str[100];
