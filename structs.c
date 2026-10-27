@@ -44,8 +44,7 @@ struct Point {
   int y;
 } p1;
 
-void pointerzuweisung(struct Point *ptr1){
-    ptr1 = &p1;
+void pointerzuweisung(struct Point *ptr1) {
     ptr1->x = 3;
     ptr1->y = 4;
 }
@@ -132,7 +131,7 @@ int main() {
     d.zahl = 123456;
 
     for (int i = 0; i < 4; i++) {
-        sende_byte(d.byte[i]);     // jedes Byte einzeln senden
+        printf("Byte %d: 0x%02x\n", i, d.byte[i]);
     }
     //Du schreibst die Zahl hinein und liest die Bytes heraus, ohne zu kopieren oder zu rechnen. Genauso geht es umgekehrt, wenn du 4 empfangene Bytes zu einer Zahl zusammensetzen willst.
     /**********************************************/
